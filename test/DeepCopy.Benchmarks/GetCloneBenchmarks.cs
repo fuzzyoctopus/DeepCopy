@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Jobs;
 using CloneExtensions;
 
 namespace DeepCopy.Benchmarks
 {
+    [SimpleJob(RuntimeMoniker.NetCoreApp31, baseline: true)]
+    [SimpleJob(RuntimeMoniker.Net80)]
+    [MemoryDiagnoser]
     public class GetCloneBenchmarks
     {
         private readonly SimpleClass _simpleClass;
@@ -47,60 +51,60 @@ namespace DeepCopy.Benchmarks
             return clone.Count;
         }
 
-        [Benchmark]
-        public int ListOfSimpleClassSameInstance_CloneExt()
-        {
-            var clone = this._listOfSimpleClassSameInstance.GetClone();
-            return clone.Count;
-        }
+        //[Benchmark]
+        //public int ListOfSimpleClassSameInstance_CloneExt()
+        //{
+        //    var clone = this._listOfSimpleClassSameInstance.GetClone();
+        //    return clone.Count;
+        //}
 
-        [Benchmark]
-        public int ListOfSimpleClassDifferentInstances_CloneExt()
-        {
-            var clone = this._listOfSimpleClassDifferentInstances.GetClone();
-            return clone.Count;
-        }
+        //[Benchmark]
+        //public int ListOfSimpleClassDifferentInstances_CloneExt()
+        //{
+        //    var clone = this._listOfSimpleClassDifferentInstances.GetClone();
+        //    return clone.Count;
+        //}
 
-        [Benchmark]
-        public int ListOfStruct_CloneExt()
-        {
-            var clone = this._listOfSimpleStruct.GetClone();
-            return clone.Count;
-        }
+        //[Benchmark]
+        //public int ListOfStruct_CloneExt()
+        //{
+        //    var clone = this._listOfSimpleStruct.GetClone();
+        //    return clone.Count;
+        //}
 
-        [Benchmark]
-        public int SimpleClass_DeepCopy()
-        {
-            var clone = DeepCopier.Copy(this._simpleClass);
-            return clone.Int;
-        }
+        //[Benchmark]
+        //public int SimpleClass_DeepCopy()
+        //{
+        //    var clone = DeepCopier.Copy(this._simpleClass);
+        //    return clone.Int;
+        //}
 
-        [Benchmark]
-        public int ListOfInts_DeepCopy()
-        {
-            var clone = DeepCopier.Copy(this._listOfInts);
-            return clone.Count;
-        }
+        //[Benchmark]
+        //public int ListOfInts_DeepCopy()
+        //{
+        //    var clone = DeepCopier.Copy(this._listOfInts);
+        //    return clone.Count;
+        //}
 
-        [Benchmark]
-        public int ListOfSimpleClassSameInstance_DeepCopy()
-        {
-            var clone = DeepCopier.Copy(this._listOfSimpleClassSameInstance);
-            return clone.Count;
-        }
+        //[Benchmark]
+        //public int ListOfSimpleClassSameInstance_DeepCopy()
+        //{
+        //    var clone = DeepCopier.Copy(this._listOfSimpleClassSameInstance);
+        //    return clone.Count;
+        //}
 
-        [Benchmark]
-        public int ListOfSimpleClassDifferentInstances_DeepCopy()
-        {
-            var clone = DeepCopier.Copy(this._listOfSimpleClassDifferentInstances);
-            return clone.Count;
-        }
+        //[Benchmark]
+        //public int ListOfSimpleClassDifferentInstances_DeepCopy()
+        //{
+        //    var clone = DeepCopier.Copy(this._listOfSimpleClassDifferentInstances);
+        //    return clone.Count;
+        //}
 
-        [Benchmark]
-        public int ListOfStruct_DeepCopy()
-        {
-            var clone = DeepCopier.Copy(this._listOfSimpleStruct);
-            return clone.Count;
-        }
+        //[Benchmark]
+        //public int ListOfStruct_DeepCopy()
+        //{
+        //    var clone = DeepCopier.Copy(this._listOfSimpleStruct);
+        //    return clone.Count;
+        //}
     }
 }

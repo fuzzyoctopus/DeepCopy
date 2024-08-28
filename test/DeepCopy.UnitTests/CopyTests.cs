@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DeepCopy;
 using Xunit;
 
 namespace DeepCopy.UnitTests
@@ -46,6 +47,15 @@ namespace DeepCopy.UnitTests
         public void CanCopyArraysRank3()
         {
             var original = new object[,,] { { { "Hello", 2, "World" }, { 300.0f, "World", 33 } }, { { 92, 5.0m, 135 }, { 30, true, 3 } } };
+            var result = DeepCopier.Copy(original);
+            Assert.Equal(original, result);
+            Assert.NotSame(original, result);
+        }
+
+        [Fact]
+        public void CanCopyArraysRank32()
+        {
+            var original = new string[,,] { { { "Hello", "asdf", "World" }, { "asdf", "World", "asdf" } }, { { "asdf", "asdf", "asdf" }, { "asdf", "asdf", "asdf" } } };
             var result = DeepCopier.Copy(original);
             Assert.Equal(original, result);
             Assert.NotSame(original, result);
@@ -481,7 +491,9 @@ namespace DeepCopy.UnitTests
 
         private class Component
         {
+#pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
             public Transform Transform;
+#pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
         }
 
         private class Transform : Component

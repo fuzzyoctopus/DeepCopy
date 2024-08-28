@@ -9,8 +9,7 @@ namespace DeepCopy.Benchmarks
     {
         static void Main(string[] args)
         {
-            var config = ManualConfig.Create(DefaultConfig.Instance).With(MemoryDiagnoser.Default);
-            BenchmarkRunner.Run<GetCloneBenchmarks>(config);
+            BenchmarkRunner.Run<GetCloneBenchmarks>();
         }
     }
 
